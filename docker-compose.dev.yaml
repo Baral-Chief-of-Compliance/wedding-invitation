@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  database:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U psadmin -d wedding-invitation"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+    container_name: database
+    restart: always
+    ports:
+      - "5432:5432"
+
+    env_file:
+      - ./dev-env/database.env
+
+    image: postgres:17.6-alpine
+
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+
+    networks:
+     - wedding-invitation-network
+
+networks:
+  wedding-invitation-network:
+    driver: bridge
