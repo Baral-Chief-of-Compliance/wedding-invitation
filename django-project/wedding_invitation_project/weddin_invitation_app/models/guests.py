@@ -14,46 +14,66 @@ class Guest(models.Model):
     """Гость"""
     url_token = models.CharField(
         verbose_name='Уникальный токен',
-        default=generate_token
+        default=generate_token,
+        max_length=128,
+        blank=True
     )
     wedding = models.ForeignKey(
         verbose_name='Свадьба',
         to=Wedding,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True
     )
-    name = models.CharField(verbose_name='Имя', max_length=128)
-    surname = models.CharField(verbose_name='Фамилия', max_length=128)
+    name = models.CharField(
+        verbose_name='Имя',
+        max_length=128,
+        blank=True
+    )
+    surname = models.CharField(
+        verbose_name='Фамилия',
+        max_length=128,
+        blank=True
+    )
     invitation_official_event = models.BooleanField(
         verbose_name='Приглашение на официальное мероприятие',
-        default=True
+        default=True,
+        blank=True
     )
     invitiation_none_official_event = models.BooleanField(
         verbose_name='Приглашение на неофициальное мероприятие',
-        default=True
+        default=True,
+        blank=True
     )
     drinks = models.TextField(
         verbose_name='Предпочтение по напиткам',
         blank=True,
-        null=True
+        null=True,
+        blank=True
     )
+
     music = models.TextField(
         verbose_name='Предпочтение по музыке',
         blank=True,
-        null=True
+        null=True,
+        blank=True
     )
+
     finish_invitiation = models.BooleanField(
         verbose_name='Закончил заполнение приглшения',
-        default=False
+        default=False,
+        blank=True
     )
 
     presence_on_official_event = models.BooleanField(
         verbose_name='Присуствие на оф мероприятии',
-        default=False
+        default=False,
+        blank=True
     )
 
     presence_on_none_official_event = models.BooleanField(
         verbose_name='Присутсвие на не оф мероприятии',
-        default=False
+        default=False,
+        blank=True
     )
 
     def __str__(self) -> str:
