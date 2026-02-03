@@ -4,5 +4,5 @@ from weddin_invitation_app import views
 
 
 urlpatterns = [
-    path("", views.fill_wedding, name='fill_wedding')
+    path("<str:guest_token>/", views.fill_wedding, name='fill_wedding')
 ]

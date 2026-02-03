@@ -23,7 +23,7 @@ class WeddingOficialEvent(models.Model):
     date = models.DateTimeField(verbose_name='Дата и время мероприятия')
     address = models.TextField(verbose_name='Адрес мероприятия')
     latitude = models.FloatField(verbose_name='Ширина')
-    longitude = models.FieldFile(verbose_name='Долгота')
+    longitude = models.FloatField(verbose_name='Долгота')
 
     def __str__(self) -> str:
         return f'Официальное мероприятие {self.wedding}'
@@ -38,13 +38,13 @@ class WeddingNoneOficialEvent(models.Model):
     wedding = models.OneToOneField(
         verbose_name='Свадьба',
         to=Wedding,
-        on_delet=models.CASCADE,
-        related_name='no_oficial_event'
+        on_delete=models.CASCADE,
+        related_name='no_oficial_event',
     )
     date = models.DateTimeField(verbose_name='Дата и вермя мероприятия')
     address = models.TextField(verbose_name='Адрес мероприятия')
     latitude = models.FloatField(verbose_name='Ширина')
-    longitude = models.FieldFile(verbose_name='Долгота')
+    longitude = models.FloatField(verbose_name='Долгота')
 
     def __str__(self) -> str:
         return f'Неофициальное мероприятие {self.wedding}'

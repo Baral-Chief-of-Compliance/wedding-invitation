@@ -47,15 +47,13 @@ class Guest(models.Model):
     drinks = models.TextField(
         verbose_name='Предпочтение по напиткам',
         blank=True,
-        null=True,
-        blank=True
+        null=True
     )
 
     music = models.TextField(
         verbose_name='Предпочтение по музыке',
         blank=True,
-        null=True,
-        blank=True
+        null=True
     )
 
     finish_invitiation = models.BooleanField(
@@ -72,6 +70,19 @@ class Guest(models.Model):
 
     presence_on_none_official_event = models.BooleanField(
         verbose_name='Присутсвие на не оф мероприятии',
+        default=False,
+        blank=True
+    )
+
+    
+    permission_plus_one = models.BooleanField(
+        verbose_name='Возможность +1 гость',
+        default=False,
+        blank=True
+    )
+
+    will_plus_one = models.BooleanField(
+        verbose_name='Будет +1 гость',
         default=False,
         blank=True
     )

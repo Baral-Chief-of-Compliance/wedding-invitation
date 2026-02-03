@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -8,10 +8,9 @@ from weddin_invitation_app.models import Guest, Wedding,\
 WeddingNoneOficialEvent, WeddingOficialEvent
 
 
-def fill_wedding(request: HttpRequest) -> HttpResponse:
+def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
     """Заполнить форму"""
 
-    guest_token: Optional[str] = request.GET.get('guest_token')
     guest : Guest = get_object_or_404(Guest, url_token=guest_token)
     wedding : Wedding = guest.wedding
 
@@ -42,6 +41,9 @@ def fill_wedding(request: HttpRequest) -> HttpResponse:
         context['wedding_none_off_event_address'] = none_official_event.address
         context['wedding_none_off_event_latitude'] = none_official_event.latitude
         context['wedding_none_off_event_longitude'] = none_official_event.longitude
+
+    if guest.permission_plus_one:
+        fields.append('permission_plus_one')
 
     GuestForm = modelform_factory(
         model=Guest,
