@@ -3,12 +3,12 @@ version: '3.7'
 services:
   database:
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U psadmin -d wedding-invitation"]
+      test: ["CMD-SHELL", "pg_isready -U psadmin -d wedding_invitation"]
       interval: 5s
       timeout: 5s
       retries: 5
 
-    container_name: database
+    container_name: wedding-invitation-database
     restart: always
     ports:
       - "5432:5432"
