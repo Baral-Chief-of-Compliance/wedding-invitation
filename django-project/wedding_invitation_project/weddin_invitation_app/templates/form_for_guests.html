@@ -1,6 +1,303 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% block title %}Подтвердите участие - {{ wedding_name }}{% endblock %}
+
+{% block head %}
+    <style>
+        .form-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ff6b8b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed rgba(255, 107, 139, 0.3);
+        }
+        
+        .event-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.1);
+        }
+        
+        .event-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #5a4a4a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .event-details {
+            color: #7a6a6a;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .event-details p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: #5a4a4a;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        /* Простые стили для стандартных полей Django */
+        input[type="checkbox"], 
+        input[type="radio"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            border-radius: 10px;
+            background: white;
+            color: #5a4a4a;
+            font-size: 1rem;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #ff6b8b;
+        }
+        
+        .checkbox-option, .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-option label, .radio-option label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b8b, #ff8ba7);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 139, 0.3);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .welcome-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ff6b8b;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .guest-name {
+            font-size: 1.8rem;
+            color: #5a4a4a;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .instructions {
+            color: #7a6a6a;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+    </style>
+    <meta property="og:title" content="Подтвердите участие - {{ wedding_name }}" />
+    <meta property="og:description" content="Приглашения для {{ name }} {{ surname }}" />
+    <meta property="og:image" content="https://your-site.com/image.jpg" />
+    <meta property="og:url" content="https://your-site.com" />
+{% endblock %}
 
 {% block content %}
+<div class="form-header">
+    <h1 class="welcome-title">💌 Приглашение на свадьбу</h1>
+    <h1 class="welcome-title">{{ wedding_name }}</h1>
+    <div class="guest-name">{{ name }} {{ surname }}</div>
+    <p class="instructions">
+        Дорогой(ая) гость, пожалуйста, подтверди своё участие в торжестве
+    </p>
+</div>
 
-Тест
+<form method="POST">
+    {% csrf_token %}
+    
+    <!-- Официальное мероприятие -->
+    {% if 'presence_on_official_event' in form.fields %}
+    <div class="form-section">
+        <h2 class="section-title">🎩 Официальная церемония</h2>
+        
+        <div class="event-card">
+            <div class="event-title">
+                <span>💒</span> Церемония бракосочетания
+            </div>
+            <div class="event-details">
+                <p><strong>📅 Дата и время:</strong> {{ wedding_off_event_date }}</p>
+                <p><strong>📍 Адрес:</strong> {{ wedding_off_event_address }}</p>
+                {% if wedding_off_event_latitude and wedding_off_event_longitude %}
+                <p><strong>🗺️ </strong> 
+                    <a href="https://maps.google.com/?q={{ wedding_off_event_latitude }},{{ wedding_off_event_longitude }}"
+                       target="_blank" 
+                       style="color: #ff6b8b; text-decoration: none;">
+                        Посмотреть на карте
+                    </a>
+                </p>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Присутствие на церемонии:</label>
+                <div class="checkbox-option">
+                    {{ form.presence_on_official_event }}
+                    <label for="{{ form.presence_on_official_event.id_for_label }}">
+                        💖 Буду присутствовать
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Неофициальное мероприятие -->
+    {% if 'presence_on_none_official_event' in form.fields %}
+    <div class="form-section">
+        <h2 class="section-title">🎉 Банкет и празднование</h2>
+        
+        <div class="event-card">
+            <div class="event-title">
+                <span>🥂</span> Праздничный банкет
+            </div>
+            <div class="event-details">
+                <p><strong>📅 Дата и время:</strong> {{ wedding_none_off_event_date }}</p>
+                <p><strong>📍 Адрес:</strong> {{ wedding_none_off_event_address }}</p>
+                {% if wedding_none_off_event_latitude and wedding_none_off_event_longitude %}
+                <p><strong>🗺️ </strong> 
+                    <a href="https://maps.google.com/?q={{ wedding_none_off_event_latitude }},{{ wedding_none_off_event_longitude }}"
+                       target="_blank"
+                       style="color: #ff6b8b; text-decoration: none;">
+                        Посмотреть на карте
+                    </a>
+                </p>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Присутствие на банкете:</label>
+                <div class="checkbox-option">
+                    {{ form.presence_on_none_official_event }}
+                    <label for="{{ form.presence_on_none_official_event.id_for_label }}">
+                        🎊 Буду присутствовать
+                    </label>
+                </div>
+            </div>
+            
+            {% if 'drinks' in form.fields %}
+            <div class="form-group">
+                <label class="form-label">Напитки:</label>
+                <div>
+                    {{ form.drinks }}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if 'music' in form.fields %}
+            <div class="form-group">
+                <label class="form-label">{{ form.music.label }}:</label>
+                {{ form.music }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Плюс один -->
+    {% if 'permission_plus_one' in form.fields %}
+    <div class="form-section">
+        <h2 class="section-title">👥 Гость +1</h2>
+        
+        <div class="event-card">
+            <div class="event-title">
+                <span>💑</span> Сопровождение
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-option">
+                    {{ form.permission_plus_one }}
+                    <label for="{{ form.permission_plus_one.id_for_label }}">
+                        💑 Буду с сопровождающим
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Кнопка отправки -->
+    <div style="text-align: center; margin-top: 50px;">
+        <button type="submit" class="submit-btn">
+            💌 Подтвердить участие
+        </button>
+    </div>
+</form>
+
+{% if form.errors %}
+<div class="error-messages" style="margin-top: 30px; padding: 15px; background: rgba(255, 107, 139, 0.1); border-radius: 10px; color: #ff6b8b;">
+    <p style="margin-bottom: 10px; font-weight: 500;">⚠️ Пожалуйста, исправьте следующие ошибки:</p>
+    <ul style="margin-left: 20px;">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 {% endblock %}

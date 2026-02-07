@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Доступ запрещен{% endblock %}
+
+{% block content %}
+<div class="text-center py-8">
+    <!-- Декоративный элемент -->
+    <div class="text-8xl mb-6" style="color: rgba(255, 182, 193, 0.3);">🔒</div>
+    
+    <h1 class="text-7xl font-bold mb-4" style="color: #ffa726;">403</h1>
+    <h2 class="text-2xl font-semibold mb-6" style="color: #5a4a4a;">Доступ запрещен</h2>
+    
+    <div class="max-w-md mx-auto mb-8">
+        <p class="text-lg mb-6" style="color: #7a6a6a;">
+            У вас недостаточно прав для просмотра этой страницы.
+        </p>
+        
+        <div class="mt-6 p-4 rounded-lg" style="background: rgba(255, 167, 38, 0.1); border: 1px dashed rgba(255, 167, 38, 0.3);">
+            <p class="text-sm" style="color: #7a6a6a;">
+                {% if exception %}
+                    <strong>Причина:</strong> {{ exception }}
+                {% else %}
+                    <strong>Возможные причины:</strong><br>
+                    • Эта страница доступна только для авторизованных пользователей<br>
+                    • У вас недостаточно прав доступа<br>
+                    • Страница временно заблокирована
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    
+    <div class="mt-10">
+        <p class="text-sm" style="color: rgba(90, 74, 74, 0.7);">
+            Если вы считаете, что это ошибка, обратитесь к администратору
+        </p>
+    </div>
+</div>
+
+<style>
+    .text-7xl {
+        font-size: 5rem;
+        line-height: 1;
+    }
+    
+    .text-8xl {
+        font-size: 6rem;
+        line-height: 1;
+    }
+    
+    @media (max-width: 768px) {
+        .text-7xl {
+            font-size: 4rem;
+        }
+        
+        .text-8xl {
+            font-size: 4rem;
+        }
+    }
+</style>
+{% endblock %}

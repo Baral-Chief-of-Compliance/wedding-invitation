@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Некорректный запрос{% endblock %}
+
+{% block content %}
+<div class="text-center py-8">
+    <!-- Декоративный элемент -->
+    <div class="text-8xl mb-6" style="color: rgba(255, 182, 193, 0.3);">⚠️</div>
+    
+    <h1 class="text-7xl font-bold mb-4" style="color: #42a5f5;">400</h1>
+    <h2 class="text-2xl font-semibold mb-6" style="color: #5a4a4a;">Некорректный запрос</h2>
+    
+    <div class="max-w-md mx-auto mb-8">
+        <p class="text-lg mb-6" style="color: #7a6a6a;">
+            Сервер не может обработать ваш запрос из-за ошибки в данных.
+        </p>
+        
+        <div class="mt-6 p-4 rounded-lg" style="background: rgba(66, 165, 245, 0.1); border: 1px dashed rgba(66, 165, 245, 0.3);">
+            <p class="text-sm" style="color: #7a6a6a;">
+                {% if exception %}
+                    <strong>Ошибка:</strong> {{ exception }}
+                {% else %}
+                    <strong>Что это значит?</strong><br>
+                    • Возможно, в форме были некорректные данные<br>
+                    • Истек срок действия страницы<br>
+                    • Произошла ошибка при обработке запроса
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    
+    <div class="mt-8">
+        <button onclick="history.back()" 
+                class="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                style="background: rgba(66, 165, 245, 0.1); color: #42a5f5; border: 1px solid rgba(66, 165, 245, 0.3);">
+            <span class="mr-2">←</span> Вернуться назад
+        </button>
+    </div>
+    
+    <div class="mt-10">
+        <p class="text-xs" style="color: rgba(90, 74, 74, 0.5);">
+            Попробуйте заполнить форму заново
+        </p>
+    </div>
+</div>
+
+<style>
+    .text-7xl {
+        font-size: 5rem;
+        line-height: 1;
+    }
+    
+    .text-8xl {
+        font-size: 6rem;
+        line-height: 1;
+    }
+    
+    @media (max-width: 768px) {
+        .text-7xl {
+            font-size: 4rem;
+        }
+        
+        .text-8xl {
+            font-size: 4rem;
+        }
+    }
+</style>
+{% endblock %}

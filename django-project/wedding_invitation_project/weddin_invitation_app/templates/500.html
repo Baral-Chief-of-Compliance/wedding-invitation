@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Ошибка сервера{% endblock %}
+
+{% block content %}
+<div class="text-center py-8">
+    <!-- Декоративный элемент -->
+    <div class="text-8xl mb-6" style="color: rgba(255, 182, 193, 0.3);">💔</div>
+    
+    <h1 class="text-7xl font-bold mb-4" style="color: #ff6b6b;">500</h1>
+    <h2 class="text-2xl font-semibold mb-6" style="color: #5a4a4a;">Внутренняя ошибка сервера</h2>
+    
+    <div class="max-w-md mx-auto mb-8">
+        <p class="text-lg mb-6" style="color: #7a6a6a;">
+            На сервере произошла непредвиденная ошибка.<br>
+            Мы уже получили уведомление и работаем над её устранением.
+        </p>
+        
+        <div class="mt-6 p-4 rounded-lg" style="background: rgba(255, 107, 107, 0.1); border: 1px dashed rgba(255, 107, 107, 0.3);">
+            <p class="text-sm" style="color: #7a6a6a;">
+                <strong>Что случилось?</strong><br>
+                Сервер не смог обработать ваш запрос из-за технической ошибки.
+            </p>
+            
+            <div class="mt-4 pt-4 border-t" style="border-color: rgba(255, 107, 107, 0.2);">
+                <p class="text-sm" style="color: #7a6a6a;">
+                    <strong>Что делать?</strong><br>
+                    1. Подождите несколько минут<br>
+                    2. Попробуйте обновить страницу<br>
+                    3. Если ошибка повторяется — попробуйте позже
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-8">
+        <button onclick="location.reload()" 
+                class="inline-flex items-center px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                style="background: rgba(255, 107, 107, 0.1); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.3);">
+            <span class="mr-2">🔄</span> Обновить страницу
+        </button>
+    </div>
+    
+    <div class="mt-10">
+        <p class="text-xs" style="color: rgba(90, 74, 74, 0.5);">
+            Приносим извинения за неудобства
+        </p>
+    </div>
+</div>
+
+<style>
+    .text-7xl {
+        font-size: 5rem;
+        line-height: 1;
+    }
+    
+    .text-8xl {
+        font-size: 6rem;
+        line-height: 1;
+    }
+    
+    @media (max-width: 768px) {
+        .text-7xl {
+            font-size: 4rem;
+        }
+        
+        .text-8xl {
+            font-size: 4rem;
+        }
+    }
+</style>
+{% endblock %}

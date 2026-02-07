@@ -59,3 +59,38 @@ def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
     )
 
 
+
+def error_404(request, exception):
+    """Страница ошибки Не найдено"""
+    return render(
+        request=request,
+        template_name='404.html',
+        status=404
+    )
+
+
+def error_500(request):
+    """Страницы серверной ошибки"""
+    return render(
+        request=request,
+        template_name='500.html',
+        status=500
+    )
+
+
+def error_403(request, exception):
+    """Доступ запрещен"""
+    return render(
+        request=request,
+        template_name='403.html',
+        status=403
+    )
+
+
+def error_400(request, exception):
+    """Плохой запрос"""
+    return render(
+        request=request,
+        template_name='400.html',
+        status=400
+    )
