@@ -4,3 +4,5 @@ database
 
 __pycache__
 logs
+
+staticfiles

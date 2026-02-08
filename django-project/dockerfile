@@ -1,0 +1,17 @@
+FROM python:3.13-slim
+
+RUN mkdir - p /home/django-app
+
+WORKDIR /home/django-app
+
+COPY ./requeirements.txt .
+
+RUN pip install --no-cache-dir -r requeirements.txt
+
+COPY ./wedding_invitation_project .
+
+COPY ./start.sh .
+
+ENTRYPOINT ["/bin/sh", "-c", "sleep 10 && ./start.sh"]
+
+EXPOSE 8000

@@ -26,6 +26,6 @@ handler404='weddin_invitation_app.views.error_404'
 handler500='weddin_invitation_app.views.error_500'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('hto-admin/', admin.site.urls),
     path('wedding_invitation/', include('weddin_invitation_app.urls'))
 ]

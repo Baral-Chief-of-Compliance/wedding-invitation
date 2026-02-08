@@ -24,6 +24,41 @@ services:
     networks:
      - wedding-invitation-network
 
+  django-app:
+    build:
+      context: ./django-project
+      dockerfile: dockerfile
+    container_name: wedding-invitation-django-app
+    restart: always
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - ./dev-env/backend.env
+
+    volumes:
+      - ./staticfiles/:/home/django-app/staticfiles
+
+    depends_on:
+      - database
+      
+    networks:
+     - wedding-invitation-network
+
+  nginx:
+    build: './nginx'
+    restart: always
+    ports:
+      - 80:80
+
+    volumes:
+      - ./staticfiles/:/home/app/djangoApp
+    depends_on:
+      - django-app
+    networks:
+     - wedding-invitation-network
+
+
 networks:
   wedding-invitation-network:
     driver: bridge
