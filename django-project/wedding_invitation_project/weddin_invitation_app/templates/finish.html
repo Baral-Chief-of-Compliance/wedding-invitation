@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Спасибо!{% endblock %}
+
+{% block content %}
+<style>
+    .thanks-container {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .thanks-icon {
+        font-size: 80px;
+        margin-bottom: 30px;
+        animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    
+    .thanks-title {
+        font-size: 42px;
+        color: #ff6b95;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    
+    .thanks-text {
+        font-size: 20px;
+        color: #5a4a4a;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+    
+    .emoji-divider {
+        margin: 40px 0;
+        font-size: 30px;
+        opacity: 0.7;
+    }
+    
+    @media (max-width: 768px) {
+        .thanks-container {
+            padding: 20px 15px;
+        }
+        
+        .thanks-icon {
+            font-size: 60px;
+        }
+        
+        .thanks-title {
+            font-size: 32px;
+        }
+        
+        .thanks-text {
+            font-size: 18px;
+        }
+    }
+</style>
+
+<div class="thanks-container">
+    <!-- Иконка -->
+    <div class="thanks-icon">💖</div>
+    
+    <!-- Заголовок -->
+    <h1 class="thanks-title">Спасибо за заполнение формы!</h1>
+    
+    
+    <p class="thanks-text">
+        Мы очень рады, что вы сможете разделить с нами этот особенный день.
+    </p>
+    
+    <!-- Декоративный разделитель -->
+    <div class="emoji-divider">💐 ✨ 💒</div>
+</div>
+{% endblock %}

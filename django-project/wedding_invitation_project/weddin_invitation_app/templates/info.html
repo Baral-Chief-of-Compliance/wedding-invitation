@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Информация о мероприятии{% endblock %}
+
+{% block content %}
+<style>
+    .info-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .event-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        border: 2px solid rgba(255, 182, 193, 0.3);
+    }
+    
+    .event-title {
+        font-size: 36px;
+        color: #ff6b95;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .event-subtitle {
+        font-size: 18px;
+        color: #5a4a4a;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .events-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    
+    @media (min-width: 768px) {
+        .events-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    .event-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(5px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(255, 182, 193, 0.1);
+        border: 1.5px solid rgba(255, 182, 193, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(255, 182, 193, 0.2);
+    }
+    
+    .card-title {
+        font-size: 24px;
+        color: #ff6b95;
+        margin-bottom: 25px;
+        text-align: center;
+        font-weight: 500;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    
+    .card-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 2px;
+        background: linear-gradient(90deg, #ffb6c1, #d8bfd8);
+        border-radius: 1px;
+    }
+    
+    .event-details {
+        margin-bottom: 25px;
+    }
+    
+    .detail-item {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #5a4a4a;
+        display: flex;
+        align-items: flex-start;
+        padding: 8px 0;
+    }
+    
+    .detail-icon {
+        margin-right: 12px;
+        font-size: 20px;
+        min-width: 28px;
+        text-align: center;
+        opacity: 0.8;
+    }
+    
+    .detail-text {
+        line-height: 1.5;
+    }
+    
+    .map-wrapper {
+        height: 300px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-top: 20px;
+        border: 1.5px solid rgba(255, 182, 193, 0.3);
+        box-shadow: 0 4px 15px rgba(255, 182, 193, 0.1);
+    }
+    
+    /* Декоративные элементы для карточек */
+    .event-card::before {
+        content: '🌸';
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 20px;
+        opacity: 0.3;
+    }
+    
+    @media (max-width: 767px) {
+        .event-header {
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .event-title {
+            font-size: 28px;
+        }
+        
+        .event-subtitle {
+            font-size: 16px;
+        }
+        
+        .event-card {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .map-wrapper {
+            height: 250px;
+        }
+    }
+
+    @media (max-width: 767px) {
+    .event-header {
+        padding: 25px 20px;
+        margin-bottom: 30px;
+        margin-top: 10px; /* Добавляем отступ сверху */
+        border-width: 1.5px; /* Уменьшаем толщину рамки */
+    }
+    
+    .event-title {
+        font-size: 28px;
+        margin-bottom: 12px;
+        line-height: 1.3;
+    }
+    
+    .event-subtitle {
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+    
+    .info-container {
+        padding: 15px 10px; /* Уменьшаем отступы контейнера */
+    }
+    
+    .events-container {
+        gap: 20px; /* Уменьшаем промежуток между карточками */
+        margin-top: 15px;
+    }
+    
+    .event-card {
+        padding: 20px 15px; /* Уменьшаем внутренние отступы */
+        margin-bottom: 10px; /* Добавляем отступ снизу */
+    }
+}
+
+    /* Для очень маленьких экранов (менее 400px) */
+    @media (max-width: 400px) {
+        .event-header {
+            padding: 20px 15px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+        
+        .event-title {
+            font-size: 24px;
+        }
+        
+        .event-subtitle {
+            font-size: 15px;
+            padding: 0;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+</style>
+
+<div class="info-container">
+    <!-- Заголовок -->
+    <div class="event-header">
+        <h1 class="event-title">Информация о мероприятии</h1>
+        <p class="event-subtitle">
+            Детали официальной и неофициальной частей нашего торжества
+        </p>
+    </div>
+    
+    <!-- Карточки мероприятий -->
+    <div class="events-container">
+        <!-- Официальное мероприятие -->
+        {% if wedding_off_event_date %}
+        <div class="event-card">
+            <h2 class="card-title">Официальная часть</h2>
+            
+            <div class="event-details">
+                <div class="detail-item">
+                    <span class="detail-icon">📅</span>
+                    <span class="detail-text">
+                        <strong>Дата и время:</strong><br>
+                        {{ wedding_off_event_date|date:"d E Y года" }}<br>
+                        Начало в {{ wedding_off_event_date|time:"H:i" }}
+                    </span>
+                </div>
+                
+                {% if wedding_off_event_end_date %}
+                <div class="detail-item">
+                    <span class="detail-icon">⏰</span>
+                    <span class="detail-text">
+                        <strong>Окончание:</strong><br>
+                        {{ wedding_off_event_end_date|date:"H:i" }}
+                    </span>
+                </div>
+                {% endif %}
+                
+                <div class="detail-item">
+                    <span class="detail-icon">📍</span>
+                    <span class="detail-text">
+                        <strong>Место проведения:</strong><br>
+                        {{ wedding_off_event_address }}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="map-wrapper" id="officialMap"></div>
+        </div>
+        {% endif %}
+        
+        <!-- Неофициальное мероприятие -->
+        {% if wedding_none_off_event_date %}
+        <div class="event-card">
+            <h2 class="card-title">Неофициальная часть</h2>
+            
+            <div class="event-details">
+                <div class="detail-item">
+                    <span class="detail-icon">📅</span>
+                    <span class="detail-text">
+                        <strong>Дата и время:</strong><br>
+                        {{ wedding_none_off_event_date|date:"d E Y года" }}<br>
+                        Начало в {{ wedding_none_off_event_date|time:"H:i" }}
+                    </span>
+                </div>
+                
+                {% if wedding_none_off_event_end_date %}
+                <div class="detail-item">
+                    <span class="detail-icon">⏰</span>
+                    <span class="detail-text">
+                        <strong>Окончание:</strong><br>
+                        {{ wedding_none_off_event_end_date|date:"H:i" }}
+                    </span>
+                </div>
+                {% endif %}
+                
+                <div class="detail-item">
+                    <span class="detail-icon">📍</span>
+                    <span class="detail-text">
+                        <strong>Место проведения:</strong><br>
+                        {{ wedding_none_off_event_address }}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="map-wrapper" id="unofficialMap"></div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // Инициализация карты официального мероприятия
+    document.addEventListener('DOMContentLoaded', function() {
+        {% if wedding_off_event_latitude and wedding_off_event_longitude %}
+        ymaps.ready(function() {
+            var officialMap = new ymaps.Map("officialMap", {
+                center: [{{ wedding_off_event_latitude }}, {{ wedding_off_event_longitude }}],
+                zoom: 16,
+                controls: ['zoomControl', 'fullscreenControl']
+            });
+            
+            var officialPlacemark = new ymaps.Placemark([{{ wedding_off_event_latitude }}, {{ wedding_off_event_longitude }}], {
+                balloonContent: '{{ wedding_off_event_address }}'
+            }, {
+                // Опции.
+                // Необходимо указать данный тип макета.
+                iconLayout: "default#image",
+                // Своё изображение иконки метки.
+                iconImageHref: "{% static 'wedding.png' %}",
+                // Размеры метки.
+                iconImageSize: [60, 60],
+                // Смещение левого верхнего угла иконки относительно
+                // её "ножки" (точки привязки).
+                iconImageOffset: [-5, -44],
+            });
+            
+            officialMap.geoObjects.add(officialPlacemark);
+        });
+        {% endif %}
+        
+        {% if wedding_none_off_event_latitude and wedding_none_off_event_longitude %}
+        ymaps.ready(function() {
+            var unofficialMap = new ymaps.Map("unofficialMap", {
+                center: [{{ wedding_none_off_event_latitude }}, {{ wedding_none_off_event_longitude }}],
+                zoom: 16,
+                controls: ['zoomControl', 'fullscreenControl']
+            });
+            
+            var unofficialPlacemark = new ymaps.Placemark([{{ wedding_none_off_event_latitude }}, {{ wedding_none_off_event_longitude }}], {
+                balloonContent: '{{ wedding_none_off_event_address }}'
+            },                                 {
+                // Опции.
+                // Необходимо указать данный тип макета.
+                iconLayout: "default#image",
+                // Своё изображение иконки метки.
+                iconImageHref: "{% static 'party.png' %}",
+                // Размеры метки.
+                iconImageSize: [60, 60],
+                // Смещение левого верхнего угла иконки относительно
+                // её "ножки" (точки привязки).
+                iconImageOffset: [-5, -44],
+            });
+            
+            unofficialMap.geoObjects.add(unofficialPlacemark);
+        });
+        {% endif %}
+    });
+</script>
+{% endblock %}

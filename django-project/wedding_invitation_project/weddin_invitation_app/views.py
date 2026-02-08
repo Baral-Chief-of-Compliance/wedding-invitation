@@ -1,7 +1,7 @@
 from typing import List
 
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.forms.models import modelform_factory
 
 from weddin_invitation_app.models import Guest, Wedding,\
@@ -48,7 +48,7 @@ def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
         context['wedding_none_off_event_end_date'] = none_official_event.enddate
 
     if guest.permission_plus_one:
-        fields.append('permission_plus_one')
+        fields.append('will_plus_one')
 
     GuestForm = modelform_factory(
         model=Guest,
@@ -57,12 +57,66 @@ def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
 
     context['form'] = GuestForm
 
+
+    # Отображение материала, если гость уже завершил 
+    # заявку
+    if guest.finish_invitiation:
+        context.pop('form')
+        return render(
+            request=request,
+            template_name='info.html',
+            context=context
+        )
+
+
+    # Обработку POST запроса
+    if request.method == 'POST':
+
+        form = GuestForm(request.POST)
+        if form.is_valid():
+            guest : Guest = get_object_or_404(Guest, url_token=guest_token)
+            update_fields = []
+            form_keys = form.cleaned_data.keys()
+
+            if 'presence_on_official_event' in form_keys:
+                guest.presence_on_official_event = form.cleaned_data['presence_on_official_event']
+                update_fields.append('presence_on_official_event')
+
+            if 'presence_on_none_official_event' in form_keys:
+                guest.presence_on_none_official_event = form.cleaned_data['presence_on_none_official_event']
+                update_fields.append('presence_on_none_official_event')
+
+            if 'drinks' in form_keys:
+                guest.drinks = form.cleaned_data['drinks']
+                update_fields.append('drinks')
+
+            if 'music' in form_keys:
+                guest.music = form.cleaned_data['music']
+                update_fields.append('music')
+
+            if 'will_plus_one' in form_keys:
+                guest.will_plus_one = form.cleaned_data['will_plus_one']
+                update_fields.append('will_plus_one')
+            
+            guest.finish_invitiation = True
+            update_fields.append('finish_invitiation')
+
+            guest.save(update_fields=update_fields)
+            return redirect('thanks')
+
+
     return render(
         request=request,
         template_name='form_for_guests.html',
         context=context
     )
 
+
+def thanks(request: HttpRequest) -> HttpResponse:
+    return render(
+        request=request,
+        template_name='finish.html'
+    )
 
 
 def error_404(request, exception):

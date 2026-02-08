@@ -578,7 +578,7 @@
     {% endif %}
     
     <!-- Плюс один -->
-    {% if 'permission_plus_one' in form.fields %}
+    {% if 'will_plus_one' in form.fields %}
     <div class="form-section">
         <h2 class="section-title">👥 Гость +1</h2>
         
@@ -589,8 +589,8 @@
             
             <div class="form-group">
                 <div class="checkbox-option">
-                    {{ form.permission_plus_one }}
-                    <label for="{{ form.permission_plus_one.id_for_label }}">
+                    {{ form.will_plus_one }}
+                    <label for="{{ form.will_plus_one.id_for_label }}">
                         {% if female %} 
                             💑 Буду со спутником
                             {% elif male %}
