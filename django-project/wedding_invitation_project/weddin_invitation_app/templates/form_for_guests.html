@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Подтвердите участие - {{ wedding_name }}{% endblock %}
+{% block title %}Приглашение на {{ wedding_name }}{% endblock %}
 
 {% block head %}
     <style>
@@ -155,12 +155,12 @@
 
         /* форма для напитков */
         /* Стили для текстовой формы напитков в стиле вашего свадебного шаблона */
-        .form-group {
+        .form-group-drink {
             margin-bottom: 25px;
             position: relative;
         }
 
-        .form-label {
+        .form-label-drink {
             display: block;
             margin-bottom: 8px;
             font-family: 'Montserrat', sans-serif;
@@ -170,7 +170,7 @@
             letter-spacing: 0.3px;
         }
 
-        .form-group div {
+        .form-group-drink div {
             position: relative;
         }
 
@@ -223,7 +223,7 @@
         }
 
         /* Декоративный элемент для формы */
-        .form-group::after {
+        .form-group-drink::after {
             content: '🥂';
             position: absolute;
             right: 15px;
@@ -233,17 +233,17 @@
             transition: opacity 0.3s ease;
         }
 
-        .form-group:focus-within::after {
+        .form-group-drink:focus-within::after {
             opacity: 0.8;
         }
 
         /* Адаптивность */
         @media (max-width: 768px) {
-            .form-group {
+            .form-group-drink {
                 margin-bottom: 20px;
             }
             
-            .form-label {
+            .form-label-drink {
                 font-size: 15px;
             }
             
@@ -253,7 +253,7 @@
                 border-radius: 14px;
             }
             
-            .form-group::after {
+            .form-group-drink::after {
                 right: 12px;
                 top: 36px;
                 font-size: 16px;
@@ -398,10 +398,16 @@
         }
 
     </style>
-    <meta property="og:title" content="Подтвердите участие - {{ wedding_name }}" />
+    <meta property="og:title" content="Приглашение на {{ wedding_name }}" />
     <meta property="og:description" content="Приглашения для {{ name }} {{ surname }}" />
-    <meta property="og:image" content="https://wedding51.ru/static/wedding.png" />
+    <meta property="og:image" content="https://wedding51.ru/static/ogWedding.png" />
     <meta property="og:url" content="https://wedding51.ru/wedding_invitation/{{token}}/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Приглашение на свадьбу" />
+    <meta property="og:locale" content="ru">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="vk:image" content="https://wedding51.ru/static/ogWedding.png" />
 {% endblock %}
 
 {% block content %}
@@ -411,11 +417,11 @@
     <div class="guest-name">{{ name }} {{ surname }}</div>
     <p class="instructions">
         {% if female %}
-        Дорогая гостья, пожалуйста, подтверди своё участие в торжестве
+        Дорогая гостья, пожалуйста, подтверди своё участие на торжестве
         {% elif male %}
-        Дорогой гость, пожалуйста, подтверди своё участие в торжестве
+        Дорогой гость, пожалуйста, подтверди своё участие на торжестве
         {% else %}
-        Дорогой(ая) гость, пожалуйста, подтверди своё участие в торжестве
+        Дорогой(ая) гость, пожалуйста, подтверди своё участие на торжестве
         {% endif %}
     </p>
 </div>
@@ -559,8 +565,8 @@
             </div>
             
             {% if 'drinks' in form.fields %}
-            <div class="form-group">
-                <label class="form-label">Напитки (Алкогольные/Безалкогольные):</label>
+            <div class="form-group-drink">
+                <label class="form-label-drink">Напитки (Алкогольные/Безалкогольные):</label>
                 <div>
                     {{ form.drinks }}
                 </div>

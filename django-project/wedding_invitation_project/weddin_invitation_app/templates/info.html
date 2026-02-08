@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Информация о мероприятии{% endblock %}
+{% block title %}Приглашение на {{ wedding_name }}{% endblock %}
+
+{% block head %}
+    <meta property="og:title" content="Приглашение на - {{ wedding_name }}" />
+    <meta property="og:description" content="Приглашения для {{ name }} {{ surname }}" />
+    <meta property="og:image" content="https://wedding51.ru/static/ogWedding.png" />
+    <meta property="og:url" content="https://wedding51.ru/wedding_invitation/{{token}}/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Приглашение на свадьбу" />
+    <meta property="og:locale" content="ru">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="vk:image" content="https://wedding51.ru/static/ogWedding.png" />
+    
+{% endblock %}
 
 {% block content %}
 <style>
