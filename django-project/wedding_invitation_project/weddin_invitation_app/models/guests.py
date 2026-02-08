@@ -87,6 +87,21 @@ class Guest(models.Model):
         blank=True
     )
 
+    male = models.BooleanField(
+        verbose_name='Мужчина',
+        default=False,
+        blank=True
+    )
+
+    female = models.BooleanField(
+        verbose_name='Женщина',
+        default=False,
+        blank=True
+    )
+
+    
+
+
     def __str__(self) -> str:
         return f'Приглашение {self.name} {self.surname} на {self.wedding}'
     

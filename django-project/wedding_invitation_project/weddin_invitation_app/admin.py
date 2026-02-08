@@ -26,11 +26,10 @@ class WeddingNoneOficialEventAdmin(admin.ModelAdmin):
 class GuestAdmin(admin.ModelAdmin):
     list_display = ('wedding', 'url_token',
                     'name', 'surname', 
+                    'male', 'female',
                     'invitation_official_event',
                     'invitiation_none_official_event',
                     'finish_invitiation',
-                    'presence_on_official_event',
-                    'presence_on_none_official_event',
                     'permission_plus_one',
                     'will_plus_one'
                     )
@@ -38,6 +37,8 @@ class GuestAdmin(admin.ModelAdmin):
         'url_token',
         'will_plus_one',
         'finish_invitiation',
+        'presence_on_official_event',
+        'presence_on_none_official_event',
         'drinks',
         'music'
     ]

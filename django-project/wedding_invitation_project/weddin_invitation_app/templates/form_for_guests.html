@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Подтвердите участие - {{ wedding_name }}{% endblock %}
 
@@ -150,20 +151,272 @@
             margin: 0 auto 30px;
             line-height: 1.6;
         }
+
+
+        /* форма для напитков */
+        /* Стили для текстовой формы напитков в стиле вашего свадебного шаблона */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #5a4a4a;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group div {
+            position: relative;
+        }
+
+        #id_drinks {
+            width: 100%;
+            padding: 14px 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #5a4a4a;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1.5px solid rgba(255, 182, 193, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.1);
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        #id_drinks:focus {
+            outline: none;
+            border-color: #ffb6c1;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        #id_drinks:hover:not(:focus) {
+            border-color: rgba(255, 182, 193, 0.5);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Плейсхолдер */
+        #id_drinks::placeholder {
+            color: rgba(90, 74, 74, 0.5);
+            font-style: italic;
+            opacity: 1;
+        }
+
+        /* Ошибка валидации в стиле шаблона */
+        #id_drinks.error {
+            border-color: rgba(255, 107, 107, 0.6);
+            background: rgba(255, 247, 247, 0.7);
+        }
+
+        #id_drinks.error:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.2);
+        }
+
+        /* Декоративный элемент для формы */
+        .form-group::after {
+            content: '🥂';
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            font-size: 18px;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-group:focus-within::after {
+            opacity: 0.8;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            .form-label {
+                font-size: 15px;
+            }
+            
+            #id_drinks {
+                padding: 12px 16px;
+                font-size: 14px;
+                border-radius: 14px;
+            }
+            
+            .form-group::after {
+                right: 12px;
+                top: 36px;
+                font-size: 16px;
+            }
+        }
+
+        /* Скроллбар для текстового поля */
+        #id_drinks::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #id_drinks::-webkit-scrollbar-track {
+            background: rgba(255, 182, 193, 0.1);
+            border-radius: 10px;
+        }
+
+        #id_drinks::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ffb6c1, #d8bfd8);
+            border-radius: 10px;
+        }
+
+
+        /* Для музыки */
+        .form-group-music {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-label-music {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #5a4a4a;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group-music div {
+            position: relative;
+        }
+
+        #id_music {
+            width: 100%;
+            padding: 14px 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #5a4a4a;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1.5px solid rgba(255, 182, 193, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.1);
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        #id_music:focus {
+            outline: none;
+            border-color: #ffb6c1;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        #id_music:hover:not(:focus) {
+            border-color: rgba(255, 182, 193, 0.5);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Плейсхолдер */
+        #id_music::placeholder {
+            color: rgba(90, 74, 74, 0.5);
+            font-style: italic;
+            opacity: 1;
+        }
+
+        /* Ошибка валидации в стиле шаблона */
+        #id_music.error {
+            border-color: rgba(255, 107, 107, 0.6);
+            background: rgba(255, 247, 247, 0.7);
+        }
+
+        #id_music.error:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.2);
+        }
+
+        /* Декоративный элемент для формы */
+        .form-group-music::after {
+            content: '🎵';
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            font-size: 18px;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-group-music:focus-within::after {
+            opacity: 0.8;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .form-group-music {
+                margin-bottom: 20px;
+            }
+            
+            .form-label-music {
+                font-size: 15px;
+            }
+            
+            #id_music {
+                padding: 12px 16px;
+                font-size: 14px;
+                border-radius: 14px;
+            }
+            
+            .form-group-music::after {
+                right: 12px;
+                top: 36px;
+                font-size: 16px;
+            }
+        }
+
+        /* Скроллбар для текстового поля */
+        #id_music::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #id_music::-webkit-scrollbar-track {
+            background: rgba(255, 182, 193, 0.1);
+            border-radius: 10px;
+        }
+
+        #id_music::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ffb6c1, #d8bfd8);
+            border-radius: 10px;
+        }
+
     </style>
     <meta property="og:title" content="Подтвердите участие - {{ wedding_name }}" />
     <meta property="og:description" content="Приглашения для {{ name }} {{ surname }}" />
-    <meta property="og:image" content="https://your-site.com/image.jpg" />
-    <meta property="og:url" content="https://your-site.com" />
+    <meta property="og:image" content="https://wedding51.ru/static/wedding.png" />
+    <meta property="og:url" content="https://wedding51.ru/wedding_invitation/{{token}}/" />
 {% endblock %}
 
 {% block content %}
 <div class="form-header">
-    <h1 class="welcome-title">💌 Приглашение на свадьбу</h1>
+    <h1 class="welcome-title">💌 Приглашение на</h1>
     <h1 class="welcome-title">{{ wedding_name }}</h1>
     <div class="guest-name">{{ name }} {{ surname }}</div>
     <p class="instructions">
+        {% if female %}
+        Дорогая гостья, пожалуйста, подтверди своё участие в торжестве
+        {% elif male %}
+        Дорогой гость, пожалуйста, подтверди своё участие в торжестве
+        {% else %}
         Дорогой(ая) гость, пожалуйста, подтверди своё участие в торжестве
+        {% endif %}
     </p>
 </div>
 
@@ -180,16 +433,49 @@
                 <span>💒</span> Церемония бракосочетания
             </div>
             <div class="event-details">
-                <p><strong>📅 Дата и время:</strong> {{ wedding_off_event_date }}</p>
+                <p><strong>📅 Дата и время:</strong> {{ wedding_off_event_date }} - {{wedding_off_event_end_date | time }}</p>
                 <p><strong>📍 Адрес:</strong> {{ wedding_off_event_address }}</p>
                 {% if wedding_off_event_latitude and wedding_off_event_longitude %}
-                <p><strong>🗺️ </strong> 
-                    <a href="https://maps.google.com/?q={{ wedding_off_event_latitude }},{{ wedding_off_event_longitude }}"
-                       target="_blank" 
-                       style="color: #ff6b8b; text-decoration: none;">
-                        Посмотреть на карте
-                    </a>
-                </p>
+                <div id="mapOffEvent" style="width: 100%; height: 400px"></div>
+                <script type="text/javascript">
+
+                    ymaps.ready(function () {
+                        var myMap = new ymaps.Map(
+                                "mapOffEvent",
+                                {
+                                    center: [{{ wedding_off_event_latitude }}, {{ wedding_off_event_longitude }}],
+                                    zoom: 17,
+                                    controls: []
+                                },
+                            ),
+                            // Создаём макет содержимого.
+                            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+                            ),
+                            myPlacemark = new ymaps.Placemark(
+                                myMap.getCenter(),
+                                {
+                                    hintContent: "Место проведения церемонии",
+                                    balloonContent: "Место проведения церемонии",
+                                },
+                                {
+                                    // Опции.
+                                    // Необходимо указать данный тип макета.
+                                    iconLayout: "default#image",
+                                    // Своё изображение иконки метки.
+                                    iconImageHref: "{% static 'wedding.png' %}",
+                                    // Размеры метки.
+                                    iconImageSize: [60, 60],
+                                    // Смещение левого верхнего угла иконки относительно
+                                    // её "ножки" (точки привязки).
+                                    iconImageOffset: [-5, -44],
+                                }
+                            );
+
+                        myMap.geoObjects.add(myPlacemark);
+                    });
+
+                </script>
                 {% endif %}
             </div>
             
@@ -216,16 +502,49 @@
                 <span>🥂</span> Праздничный банкет
             </div>
             <div class="event-details">
-                <p><strong>📅 Дата и время:</strong> {{ wedding_none_off_event_date }}</p>
+                <p><strong>📅 Дата и время:</strong> {{ wedding_none_off_event_date }} - {{wedding_none_off_event_end_date | time }}</p>
                 <p><strong>📍 Адрес:</strong> {{ wedding_none_off_event_address }}</p>
                 {% if wedding_none_off_event_latitude and wedding_none_off_event_longitude %}
-                <p><strong>🗺️ </strong> 
-                    <a href="https://maps.google.com/?q={{ wedding_none_off_event_latitude }},{{ wedding_none_off_event_longitude }}"
-                       target="_blank"
-                       style="color: #ff6b8b; text-decoration: none;">
-                        Посмотреть на карте
-                    </a>
-                </p>
+                <div id="mapNoneOffEvent" style="width: 100%; height: 400px"></div>
+                <script type="text/javascript">
+
+                    ymaps.ready(function () {
+                        var myMap = new ymaps.Map(
+                                "mapNoneOffEvent",
+                                {
+                                    center: [{{ wedding_none_off_event_latitude }}, {{ wedding_none_off_event_longitude }}],
+                                    zoom: 17,
+                                    controls: []
+                                },
+                            ),
+                            // Создаём макет содержимого.
+                            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+                            ),
+                            myPlacemark = new ymaps.Placemark(
+                                myMap.getCenter(),
+                                {
+                                    hintContent: "Место проведения банкета",
+                                    balloonContent: "Место проведения банкета",
+                                },
+                                {
+                                    // Опции.
+                                    // Необходимо указать данный тип макета.
+                                    iconLayout: "default#image",
+                                    // Своё изображение иконки метки.
+                                    iconImageHref: "{% static 'party.png' %}",
+                                    // Размеры метки.
+                                    iconImageSize: [60, 60],
+                                    // Смещение левого верхнего угла иконки относительно
+                                    // её "ножки" (точки привязки).
+                                    iconImageOffset: [-5, -44],
+                                }
+                            );
+
+                        myMap.geoObjects.add(myPlacemark);
+                    });
+
+                </script>
                 {% endif %}
             </div>
             
@@ -241,7 +560,7 @@
             
             {% if 'drinks' in form.fields %}
             <div class="form-group">
-                <label class="form-label">Напитки:</label>
+                <label class="form-label">Напитки (Алкогольные/Безалкогольные):</label>
                 <div>
                     {{ form.drinks }}
                 </div>
@@ -249,8 +568,8 @@
             {% endif %}
             
             {% if 'music' in form.fields %}
-            <div class="form-group">
-                <label class="form-label">{{ form.music.label }}:</label>
+            <div class="form-group-music">
+                <label class="form-label-music">Музыка (Ссылки на небольшие плейлисты с музыкой):</label>
                 {{ form.music }}
             </div>
             {% endif %}
@@ -272,7 +591,13 @@
                 <div class="checkbox-option">
                     {{ form.permission_plus_one }}
                     <label for="{{ form.permission_plus_one.id_for_label }}">
-                        💑 Буду с сопровождающим
+                        {% if female %} 
+                            💑 Буду со спутником
+                            {% elif male %}
+                            💑 Буду со спутницей
+                            {% else  %}
+                            💑 Буду со спутницей/спутником
+                        {% endif %}
                     </label>
                 </div>
             </div>

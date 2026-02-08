@@ -21,6 +21,7 @@ class WeddingOficialEvent(models.Model):
         related_name='oficial_event'
     )
     date = models.DateTimeField(verbose_name='Дата и время мероприятия')
+    enddate = models.DateTimeField(verbose_name='Дата и время окончания мероприятия', null=True, blank=True)
     address = models.TextField(verbose_name='Адрес мероприятия')
     latitude = models.FloatField(verbose_name='Ширина')
     longitude = models.FloatField(verbose_name='Долгота')
@@ -42,6 +43,7 @@ class WeddingNoneOficialEvent(models.Model):
         related_name='no_oficial_event',
     )
     date = models.DateTimeField(verbose_name='Дата и вермя мероприятия')
+    enddate = models.DateTimeField(verbose_name='Дата и время окончания мероприятия', null=True, blank=True)
     address = models.TextField(verbose_name='Адрес мероприятия')
     latitude = models.FloatField(verbose_name='Ширина')
     longitude = models.FloatField(verbose_name='Долгота')

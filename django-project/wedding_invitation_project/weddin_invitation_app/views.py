@@ -19,7 +19,10 @@ def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
     context = {
         'name': guest.name,
         'surname': guest.surname,
-        'wedding_name': wedding.name
+        'wedding_name': wedding.name,
+        'female': guest.female,
+        'male': guest.male,
+        'token': guest.url_token
     }
 
 
@@ -28,8 +31,9 @@ def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
         official_event : WeddingOficialEvent = wedding.oficial_event
         context['wedding_off_event_date'] = official_event.date
         context['wedding_off_event_address'] = official_event.address
-        context['wedding_off_event_latitude'] = official_event.latitude
-        context['wedding_off_event_longitude'] = official_event.longitude
+        context['wedding_off_event_latitude'] = str(official_event.latitude).replace(',','.')
+        context['wedding_off_event_longitude'] = str(official_event.longitude).replace(',','.')
+        context['wedding_off_event_end_date'] = official_event.enddate
         
 
     if guest.invitiation_none_official_event:
@@ -39,8 +43,9 @@ def fill_wedding(request: HttpRequest, guest_token: str) -> HttpResponse:
         none_official_event : WeddingNoneOficialEvent = wedding.no_oficial_event
         context['wedding_none_off_event_date'] = none_official_event.date
         context['wedding_none_off_event_address'] = none_official_event.address
-        context['wedding_none_off_event_latitude'] = none_official_event.latitude
-        context['wedding_none_off_event_longitude'] = none_official_event.longitude
+        context['wedding_none_off_event_latitude'] = str(none_official_event.latitude).replace(',','.')
+        context['wedding_none_off_event_longitude'] = str(none_official_event.longitude).replace(',','.')
+        context['wedding_none_off_event_end_date'] = none_official_event.enddate
 
     if guest.permission_plus_one:
         fields.append('permission_plus_one')
